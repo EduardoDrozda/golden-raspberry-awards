@@ -11,7 +11,7 @@ import { CsvLoaderService } from "./seed/csv-loader.service";
 import { CsvTransformerService } from "./seed/csv-transformer.service";
 import { Injectable } from "@nestjs/common";
 
-const CONCURRENCY_LIMIT = 5;
+const CONCURRENCY_LIMIT = 100;
 
 @Injectable()
 export class DatabaseInitService {

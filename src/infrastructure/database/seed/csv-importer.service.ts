@@ -10,6 +10,7 @@ export class CsvImporterService {
   constructor(private readonly loggerService: LoggerService) { }
 
   async import(data: CreateMovieWithAssociationsModel) {
+
     await this.database.transaction(async (trx) => {
       const { producers, studios, ...movieData } = data;
       try {
