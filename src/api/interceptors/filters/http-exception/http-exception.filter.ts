@@ -1,10 +1,11 @@
 import { IBaseResponse } from '@api/interfaces';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 
-@Catch()
-export class ErrorFilter<T extends HttpException> implements ExceptionFilter {
+@Catch(HttpException)
+export class HttpExceptionFilter<T extends HttpException> implements ExceptionFilter {
   catch(exception: T, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
+    console.log('ErrorFilter: exception:', exception);
 
     const response = ctx.getResponse();
 

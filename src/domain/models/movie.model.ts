@@ -6,3 +6,8 @@ export type MovieModel = {
 }
 
 export type CreateMovieModelInput = Omit<MovieModel, 'id'>;
+
+export type CreateMovieWithAssociationsModel = CreateMovieModelInput & {
+  producers: string[];
+  studios: string[];
+}

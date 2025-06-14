@@ -14,11 +14,11 @@ declare module "knex/types/tables" {
       id: number;
       name: string;
     };
-    movie_studios: {
+    movies_studios: {
       movie_id: number;
       studio_id: number;
     };
-    movie_producers: {
+    movies_producers: {
       movie_id: number;
       producer_id: number;
     };

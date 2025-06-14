@@ -1,7 +1,7 @@
-import { CreateProducerModelInput, ProducerModel } from "@domain/models/producter.model";
+import { CreateProducerModelInput, ProducerModel, ProducerModelWithMovies } from "@domain/models/producter.model";
 
 export const PRODUCERS_REPOSITORY = "IProducersRepository";
 
 export interface IProducersRepository {
-  create(data: CreateProducerModelInput): Promise<ProducerModel>;
+  findProducersWithMovies(): Promise<ProducerModelWithMovies[]>;
 }
