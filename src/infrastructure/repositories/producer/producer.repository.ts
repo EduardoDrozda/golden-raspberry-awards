@@ -33,4 +33,15 @@ export class ProducerRepository implements IProducersRepository {
           }]
         })) as ProducerModelWithMovies[]))
   }
+  async findAllProducers(): Promise<ProducerModel[]> {
+    return this.database('producers')
+      .select('id', 'name')
+      .orderBy('name', 'asc')
+      .then((rows) => (
+        rows.map(row => ({
+          id: row.id,
+          name: row.name
+        })) as ProducerModel[]
+      ));
+  }
 }

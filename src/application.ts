@@ -12,6 +12,10 @@ export class Application {
   private loggerService: LoggerService;
   private readonly prefix: string = "api";
 
+  get app(): INestApplication<AppModule> {
+    return this.server;
+  }
+
   async start(): Promise<void> {
     await this.setupApplication();
     await this.setGlobalScopes();

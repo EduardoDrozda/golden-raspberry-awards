@@ -18,6 +18,8 @@ export class GetAwardIntervalsUseCase implements IUseCase<void, GetAwardsRespons
     this.loggerService.log("Executing usecase...");
 
     const producersWithMovies = await this.producerRepository.findProducersWithWinnersMovies();
+    const producers = await this.producerRepository.findAllProducers();
+    this.loggerService.log(`Found ${producers.length} producers in the database.`);
 
     this.loggerService.log(`Found ${producersWithMovies.length} producers with movies.`);
 
