@@ -98,7 +98,7 @@ npm run start:dev
 ```
 
 ### 4. Acesse a documentação da API
-A documentação Swagger estará disponível em: http://localhost:8080/api-docs
+A documentação Swagger estará disponível em: <a href="http://localhost:8080/api-docs" target="_blank">Link</a>
 
 ### 6. Testes E2E
 Para rodar os testes E2E, execute:
