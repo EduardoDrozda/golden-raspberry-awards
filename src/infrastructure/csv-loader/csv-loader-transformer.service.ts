@@ -2,7 +2,7 @@ import { CreateMovieWithAssociationsModel } from "@domain/models/movie.model";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class CsvTransformerService {
+export class CsvLoaderTransformerService {
   transform(raw: any): CreateMovieWithAssociationsModel {
     return {
       title: raw.title,

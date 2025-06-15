@@ -38,10 +38,10 @@ export class Application {
   async setGlobalScopes(): Promise<void> {
     this.server.setGlobalPrefix(this.prefix);
 
-    // this.server.enableCors({
-    //   origin: this.enviromentService.get("CORS_ORIGIN"),
-    //   credentials: true,
-    // });
+    this.server.enableCors({
+      origin: '*',
+      credentials: true,
+    });
 
     this.server.enableVersioning({
       type: VersioningType.URI,
