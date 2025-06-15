@@ -68,8 +68,8 @@ export class Application {
     }
 
     const config = new DocumentBuilder()
-      .setTitle('TrashFlix Api')
-      .setDescription('API documentation for TrashFlix application')
+      .setTitle('Golden Raspberry Awards Api')
+      .setDescription('API documentation for Golden Raspberry Awards application')
       .setVersion('1.0')
       .build();
 

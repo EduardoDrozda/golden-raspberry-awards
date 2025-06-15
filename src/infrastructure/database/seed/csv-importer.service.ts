@@ -17,9 +17,10 @@ export class CsvImporterService {
         const [movie] = await trx('movies').insert({ ...movieData }).returning('*');
 
         await Promise.all([
-          ...data.producers.map(name => this.upsertRelation(trx, 'producers', 'movies_producers', movie.id, name)),
-          ...data.studios.map(name => this.upsertRelation(trx, 'studios', 'movies_studios', movie.id, name)),
+          ...producers.map(name => this.upsertRelation(trx, 'producers', 'movies_producers', movie.id, name)),
+          ...studios.map(name => this.upsertRelation(trx, 'studios', 'movies_studios', movie.id, name)),
         ]);
+
       } catch (error) {
         this.loggerService.error(`Error importing movie: ${error.message}`);
         throw error;
