@@ -1,5 +1,6 @@
 import { GetAwardIntervalsUseCase } from '@application/use-cases/producers';
-import { Controller, Get } from '@nestjs/common';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
@@ -36,6 +37,7 @@ export class ProducerController {
     }
   })
   @ApiResponse({ status: 500, description: 'Internal server error' })
+  @UseInterceptors(CacheInterceptor)
   @Get('/award-intervals')
   async getAwardsResume() {
     return this.getAwardIntervalsUseCase.execute();
