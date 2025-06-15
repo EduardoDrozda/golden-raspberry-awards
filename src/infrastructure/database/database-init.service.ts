@@ -5,10 +5,9 @@ import { Knex } from "knex";
 import { knex } from ".";
 import * as path from "path";
 import { existsSync } from "fs";
-import pLimit from "p-limit";
-
 import { CsvLoaderService, CsvLoaderTransformerService } from "@infrastructure/csv-loader";
 import { CreateMovieWithAssociationsModel } from "@domain/models/movie.model";
+import pLimit from "p-limit";
 
 const CONCURRENCY_LIMIT = 100;
 

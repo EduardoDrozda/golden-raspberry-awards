@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { EnviromentService } from './enviroment.service';
 import { ConfigModule } from '@nestjs/config';
-import * as path from 'node:path';
 import { validate } from './config-schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [path.resolve(__dirname, '..', '..', '..', '..', '.env')],
+      envFilePath: [
+        `.env.${process.env.NODE_ENV || ''}`
+      ],
       validate,
       isGlobal: true,
     }),
@@ -15,4 +16,4 @@ import { validate } from './config-schema';
   providers: [EnviromentService],
   exports: [EnviromentService]
 })
-export class EnviromentModule {}
+export class EnviromentModule { }

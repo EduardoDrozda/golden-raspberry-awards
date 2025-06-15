@@ -10,7 +10,7 @@ export class GetAwardIntervalsUseCase implements IUseCase<void, GetAwardsRespons
   constructor(
     @Inject(PRODUCERS_REPOSITORY) private readonly producerRepository: IProducersRepository,
     private readonly loggerService: LoggerService
-  ) { 
+  ) {
     this.loggerService.context = GetAwardIntervalsUseCase.name;
   }
 
@@ -21,11 +21,11 @@ export class GetAwardIntervalsUseCase implements IUseCase<void, GetAwardsRespons
 
     this.loggerService.log(`Found ${producersWithMovies.length} producers with movies.`);
 
-    const groupedProducers = await this.groupMoviesByProducer(producersWithMovies);
+    const groupedProducers = this.groupMoviesByProducer(producersWithMovies);
     return this.getAwardIntervals(groupedProducers);
   }
 
-  private async groupMoviesByProducer(producersWithMovies: ProducerModelWithMovies[]): Promise<ProducerModelWithMovies[]> {
+  private groupMoviesByProducer(producersWithMovies: ProducerModelWithMovies[]): ProducerModelWithMovies[] {
     const groupedProducers = new Map<string, ProducerModelWithMovies>();
 
     for (const producer of producersWithMovies) {
@@ -41,27 +41,27 @@ export class GetAwardIntervalsUseCase implements IUseCase<void, GetAwardsRespons
   }
 
   private getAwardIntervals(producersWithMovies: ProducerModelWithMovies[]): GetAwardsResponseDto {
-  const intervals = producersWithMovies.flatMap(({ name, movies }) => {
-    const winYears = movies
-      .map(m => m.year)
-      .sort((a, b) => a - b);
+    const intervals = producersWithMovies.flatMap(({ name, movies }) => {
+      const winYears = movies
+        .map(m => m.year)
+        .sort((a, b) => a - b);
 
-    if (winYears.length < 2) return [];
+      if (winYears.length < 2) return [];
 
-    return winYears.slice(1).map((year, i) => ({
-      producer: name,
-      interval: year - winYears[i],
-      previousWin: winYears[i],
-      followingWin: year
-    }));
-  });
+      return winYears.slice(1).map((year, i) => ({
+        producer: name,
+        interval: year - winYears[i],
+        previousWin: winYears[i],
+        followingWin: year
+      }));
+    });
 
-  const min = Math.min(...intervals.map(i => i.interval));
-  const max = Math.max(...intervals.map(i => i.interval));
+    const min = Math.min(...intervals.map(i => i.interval));
+    const max = Math.max(...intervals.map(i => i.interval));
 
-  return {
-    min: intervals.filter(i => i.interval === min),
-    max: intervals.filter(i => i.interval === max),
-  };
-}
+    return {
+      min: intervals.filter(i => i.interval === min),
+      max: intervals.filter(i => i.interval === max),
+    };
+  }
 }
