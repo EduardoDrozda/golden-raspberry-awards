@@ -3,5 +3,5 @@ import { CreateProducerModelInput, ProducerModel, ProducerModelWithMovies } from
 export const PRODUCERS_REPOSITORY = "IProducersRepository";
 
 export interface IProducersRepository {
-  findProducersWithMovies(): Promise<ProducerModelWithMovies[]>;
+  findProducersWithWinnersMovies(): Promise<ProducerModelWithMovies[]>;
 }

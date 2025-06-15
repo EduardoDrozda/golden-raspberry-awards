@@ -1,8 +1,8 @@
-type GetAwardsDto = {
+export type GetAwardsDto = {
   producer: string;
   interval: number;
-  previosWin: number;
-  followingWin: number;
+  previousWin?: number;
+  followingWin?: number;
 }
 
 export type GetAwardsResponseDto = {
