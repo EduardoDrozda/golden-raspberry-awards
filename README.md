@@ -106,5 +106,4 @@ Para rodar os testes E2E, execute:
 ```bash
 npm run test:e2e
 ```
-
 ---
