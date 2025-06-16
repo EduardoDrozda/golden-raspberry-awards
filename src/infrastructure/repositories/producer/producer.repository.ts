@@ -1,11 +1,8 @@
 import { IProducersRepository } from "@application/repositories";
-import { CreateProducerModelInput, ProducerModel, ProducerModelWithMovies } from "@domain/models/producter.model";
-import { knex } from "@infrastructure/database";
-import { Knex } from "knex";
+import { ProducerModel, ProducerModelWithMovies } from "@domain/models/producter.model";
+import { DatabaseService } from "@infrastructure/database/database.service";
 
-export class ProducerRepository implements IProducersRepository {
-  constructor(private readonly database: Knex = knex) { }
-
+export class ProducerRepository extends DatabaseService implements IProducersRepository {
   async findProducersWithWinnersMovies(): Promise<ProducerModelWithMovies[]> {
     return this.database('producers')
       .select(
@@ -32,16 +29,5 @@ export class ProducerRepository implements IProducersRepository {
             winner: !!row.winner
           }]
         })) as ProducerModelWithMovies[]))
-  }
-  async findAllProducers(): Promise<ProducerModel[]> {
-    return this.database('producers')
-      .select('id', 'name')
-      .orderBy('name', 'asc')
-      .then((rows) => (
-        rows.map(row => ({
-          id: row.id,
-          name: row.name
-        })) as ProducerModel[]
-      ));
   }
 }

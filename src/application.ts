@@ -25,7 +25,7 @@ export class Application {
 
     await this.server.listen(port).catch((error) => {
       this.loggerService.error(`Failed to start server on port ${port} - ${error.message}`);
-      process.exit(1);
+      this.server.close();
     });
 
     this.loggerService.log(`Server is running on port ${port}`);

@@ -3,7 +3,6 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "src/app.module";
 import { App } from "supertest/types";
 import request from "supertest";
-import { DatabaseInitService } from "@infrastructure/database/database-init.service";
 import { GetAwardsResponseDto } from "@application/dtos/producers";
 
 describe("ProducerController (e2e)", () => {
@@ -17,6 +16,10 @@ describe("ProducerController (e2e)", () => {
     app = moduleFixture.createNestApplication();
 
     await app.init();
+  });
+
+  afterEach(async () => {
+    await app.close();
   });
 
   it('GET /producers/award-intervals should return intervals about Golden Raspberry with Joel Silver and Matthew Vaughn', async () => {

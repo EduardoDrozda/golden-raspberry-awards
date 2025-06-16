@@ -88,7 +88,7 @@ cp .env.example .env
 # Se estiver usando Windows rode
 copy .env.example .env
 
-npm run knex migrate:latest
+npx knex migrate:latest
 ```
 
 ### 3. Rode o servidor
