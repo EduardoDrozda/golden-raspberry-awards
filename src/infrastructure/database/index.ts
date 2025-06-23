@@ -12,6 +12,7 @@ export const config: Knex.Config = {
     filename: process.env.DB_CONNECTION!,
   },
   migrations: {
+    extension: 'ts',
     directory: join(__dirname, 'migrations'),
   },
   seeds: {

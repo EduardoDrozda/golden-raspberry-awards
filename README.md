@@ -77,7 +77,7 @@ cd golden-raspberry-awards
 RUN npm install
 ```
 
-### 2. Rode as migrations
+### 2. Configure o ambiente
 ```bash
 
 # Copie o arquivo .env.example e renomeie para .env
@@ -87,8 +87,6 @@ cp .env.example .env
 
 # Se estiver usando Windows rode
 copy .env.example .env
-
-npx knex migrate:latest
 ```
 
 ### 3. Rode o servidor

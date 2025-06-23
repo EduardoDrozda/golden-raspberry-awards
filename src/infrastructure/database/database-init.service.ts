@@ -25,7 +25,7 @@ export class DatabaseInitService {
   }
 
   async init() {
-    await this.resetDatabase();
+    await this.runMigrations();
 
     const filename = this.env.get("DB_BOOSTRAP_FILE");
     const filePath = path.join(process.cwd(), 'assets', filename);
@@ -45,15 +45,9 @@ export class DatabaseInitService {
     });
   }
 
-  private async resetDatabase() {
-    await this.database('movies_studios').delete();
-    await this.database('movies_producers').delete();
-    await this.database('movies').delete();
-    await this.database('studios').delete();
-    await this.database('producers').delete();
-
-    await this.database.raw("DELETE FROM sqlite_sequence WHERE name IN ('movie_studios', 'movie_producers', 'movies', 'studios', 'producers')");
-    this.loggerService.log("Database reset successfully.");
+  private async runMigrations() {
+    await this.database.migrate.latest();
+    this.loggerService.log('Database migrations completed successfully.');
   }
 
   async import(data: CreateMovieWithAssociationsModel) {
